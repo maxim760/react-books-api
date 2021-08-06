@@ -1,0 +1,59 @@
+@import '../../assets/styles/variables';
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100%;
+}
+.wrapper {
+  padding: 30px 20px;
+}
+.book {
+  background-color: $bg-book-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+.bookPhoto {
+  height: 400px;
+  width: 275px;
+  box-shadow: $book-shadow;
+}
+.description {
+  flex: 1;
+  flex-basis: 400px;
+  display: flex;
+  flex-direction: column;
+}
+.type {
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+.name {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.author {
+  text-decoration: underline;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.info {
+  padding: 10px;
+  border: 2px solid $bg-book-color;
+  overflow: auto;
+  width: 100%;
+  max-height: 230px;
+  height: 100%;
+}
+.skeletonLines {
+  margin: 10px auto; display: block;
+}

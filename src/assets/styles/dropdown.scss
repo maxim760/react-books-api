@@ -1,0 +1,17 @@
+.Dropdown-root {
+  max-width: 180px;
+  width: 100%;
+  display: inline-flex;
+  // @media (max-width: 500px) {
+  //   width: 120px;
+  // }
+}
+.Dropdown-control {
+  width: 100%;
+}
+.Dropdown-menu {
+  max-height: 400px;
+}
+.Dropdown-arrow {
+  margin-top: 2.5px;
+}

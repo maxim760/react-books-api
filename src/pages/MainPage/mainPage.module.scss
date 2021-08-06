@@ -1,0 +1,72 @@
+@import "../../assets/styles/variables";
+
+.page {
+  padding: 5px 20px 20px;
+}
+.countBooks {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.booksWrapper,
+.skeletonWrapper > * {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+}
+.book {
+  height: 330px;
+  padding: 10px;
+  width: 250px;
+  background-color: $bg-book-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.2s ease-in;
+  &:hover {
+    box-shadow: $book-shadow
+  }
+}
+
+.bookImage {
+  align-self: center;
+  width: 115px;
+  height: 180px;
+  box-shadow: 6px 6px 10px rgba(#000, 0.2);
+}
+.bookType {
+  text-decoration: underline;
+  color: gray;
+}
+
+.bookName {
+  font-weight: 700;
+  color: black;
+}
+
+.bookAuthor {
+  color: gray;
+}
+.buttonMore {
+  width: 100%;
+  margin: 20px auto;
+}
+.button {
+  background-color: #fff;
+  border-radius: 10px;
+  min-width: 150px;
+  padding: 10px 20px;
+  border: 1px solid teal;
+  color: teal;
+  transition: all 0.2s ease-in;
+  transition-property: box-shadow, color, background-color, transform;
+  &:hover {
+    color: white;
+    background-color: teal;
+  }
+  &:active {
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.4);
+  }
+}
