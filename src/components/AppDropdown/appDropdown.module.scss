@@ -1,0 +1,19 @@
+.dropdownEl {
+  width: 180px;
+  cursor: pointer;
+  @media (max-width: 500px) {
+    width: 130px;
+  }
+}
+.dropdown {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.dropdownTitle {
+  color: white;
+  font-size: 18px;
+  margin-right: 3px;
+  cursor: pointer;
+}

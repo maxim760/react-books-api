@@ -1,50 +1,64 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
+import React, { useCallback, useEffect } from 'react';
 import styles from './mainPage.module.scss';
 import Skeleton from 'react-loading-skeleton';
+import { Button } from '../../components/Button';
+import { BookList } from './components/books/BookList';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import {
+  selectBooks,
+  selectIsBooksFinished,
+  selectFilterQueryParams,
+  selectStartIndex,
+  selectStatus,
+  selectTotalItems,
+} from '../../store/ducks/books/selectors';
+import { fetchBooks as fetchBooksStore } from '../../store/ducks/books/slice';
+import { PAGINATION_STEP } from '../../utils/constants';
+import { MainPageWrapper } from './components/wrapper';
 
 export const MainPage: React.FC = () => {
-  const [isSkeleton, setIsSkeleton] = useState(false);
-  const toggleMode = () => setIsSkeleton((prev) => !prev);
-  return (
-    <div className={styles.page}>
-      <p className={styles.countBooks}>Found 446 results</p>
-      {!isSkeleton ? (
-        <>
-          <div className={styles.booksWrapper}>
-            {Array(30)
-              .fill('')
-              .map((_, i) => (
-                <a key={i} href="/">
-                  <div className={styles.book}>
-                    <img
-                      className={styles.bookImage}
-                      src="https://via.placeholder.com/115x180.png"
-                      alt="book information"
-                    />
-                    <p className={styles.bookType}>Computers</p>
-                    <p className={styles.bookName}>
-                      node js путеводитель по технологии
-                    </p>
-                    <p className={styles.bookAuthor}>Кирилл Сухов</p>
-                  </div>
-                </a>
-              ))}
-          </div>
-          <button className={clsx(styles.button, styles.buttonMore)}>
-            Показать еще
-          </button>
-        </>
-      ) : (
+  const dispatch = useAppDispatch();
+  const startIndex = useAppSelector(selectStartIndex);
+  const { isLoading, isError, message } = useAppSelector(selectStatus);
+  const filterParams = useAppSelector(selectFilterQueryParams);
+  const totalItems = useAppSelector(selectTotalItems);
+  const books = useAppSelector(selectBooks);
+  const isBooksFinished = useAppSelector(selectIsBooksFinished);
+  const fetchBooks = useCallback(() => {
+    dispatch(fetchBooksStore({ count: PAGINATION_STEP, startIndex, filterParams }));
+  }, [startIndex, filterParams, dispatch]);
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+  if (isError) {
+    return (
+      <MainPageWrapper>
+        <h2>{message ? `Ошибка: ${message}` : 'ошибка'}</h2>
+      </MainPageWrapper>
+    );
+  }
+  if (isLoading && books.length === 0) {
+    return (
+      <MainPageWrapper>
         <div className={styles.skeletonWrapper}>
-          <Skeleton
-            width={250}
-            height={330}
-            className={styles.book}
-            count={10}
-          />
+          <Skeleton width={250} height={330} count={10} />
         </div>
+      </MainPageWrapper>
+    );
+  }
+  return (
+    <MainPageWrapper>
+      <p className={styles.countBooks}>Found {totalItems} results</p>
+      <BookList className={styles.booksWrapper} items={books} />
+      {!isBooksFinished && (
+        <Button
+          onClick={fetchBooks}
+          className={styles.buttonMore}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Loading...' : 'Load more'}
+        </Button>
       )}
-    </div>
+    </MainPageWrapper>
   );
 };

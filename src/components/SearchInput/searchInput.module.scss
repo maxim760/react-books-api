@@ -1,0 +1,23 @@
+.inputWrapper {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+}
+.input {
+  outline: none;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 40px 10px 10px;
+  &:focus {
+    background-color: #fbfbfb;
+  }
+}
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  right: 10px;
+}

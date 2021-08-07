@@ -1,0 +1,42 @@
+@import "../../../../../assets/styles/variables";
+@import "../../../../../assets/styles/mixins";
+
+.book {
+  height: 340px;
+  padding: 15px;
+  width: 250px;
+  background-color: $bg-book-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.2s ease-in;
+  &:hover {
+    box-shadow: $book-shadow
+  }
+}
+
+.image {
+  align-self: center;
+  width: 115px;
+  height: 180px;
+  box-shadow: 6px 6px 10px rgba(#000, 0.2);
+  @include truncate(6)
+}
+.type {
+  text-decoration: underline;
+  color: gray;
+  @include truncate(1);
+}
+
+.name {
+  font-weight: 700;
+  color: black;
+  @include truncate(2);
+
+}
+
+.author {
+  color: gray;
+  @include truncate(2);
+
+}
